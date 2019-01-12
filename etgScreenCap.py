@@ -10,6 +10,14 @@ w = x1 - x0
 h = y1 - y0
 win32gui.MoveWindow(hwnd, 0, 0, w, h, False)
 
+def draw_lines(img, lines):
+    try:
+        for line in lines:
+            coords = line[0]
+            cv2.line(img, (coords[0],coords[1]), (coords[2],coords[3]), [255,255,255], 3)
+    except:
+        pass
+
 def roi(img, vertices):
     mask = np.zeros_like(img)
     cv2.fillPoly(mask, vertices, 255)
@@ -21,6 +29,9 @@ def process_img(original_image):
     processed_img = cv2.Canny(processed_img, threshold1=200, threshold2=300)
     vertices = np.array([[160, 160], [640, 160], [640, 480], [160, 480]])
     processed_img = roi(processed_img, [vertices])
+
+    lines = cv2.HoughLinesP(processed_img, 1, np.pi/180, 180, 20, 15)
+    draw_lines(processed_img, lines)
 
     return processed_img
 
