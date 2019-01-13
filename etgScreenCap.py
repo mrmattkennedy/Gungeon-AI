@@ -17,7 +17,7 @@ last_time = time.time()
 while(True):
     screen =  np.array(ImageGrab.grab(bbox=(10, 30, 800, 630)))
     gray = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
-    bullets = bullet_cascade.detectMultiScale(screen)
+    bullets = bullet_cascade.detectMultiScale(screen, 2, 2)
 
     for (x,y,w,h) in bullets:
         cv2.rectangle(screen, (x,y), (x+w, y+h), (255,255,0), 2)

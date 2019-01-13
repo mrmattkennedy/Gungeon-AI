@@ -62,9 +62,13 @@ def compile_negatives():
             shutil.move(new_name, destination)
             current_image = current_image+1
             
-                    
+def resize_negatives():
+    for img in os.listdir('negative_images'):
+        neg = cv2.imread('negative_images/'+img, cv2.IMREAD_GRAYSCALE)
+        resized_image = cv2.resize(neg, (100, 100))
+        cv2.imwrite('negative_images/'+img, resized_image)
 
-def reshape_positive():
+def resize_positive():
     pos = cv2.imread("positive_images/1.png")
     resized_image = cv2.resize(pos, (50, 50))
     cv2.imwrite("positive_images/positive_1.jpg", resized_image)
@@ -86,6 +90,7 @@ def create_pos_n_neg():
 #reshape_positive()
 #grab_negatives()
 create_pos_n_neg()
+#resize_negatives()
 #store_raw_images()
 #find_uglies()
 #compile_negatives()
