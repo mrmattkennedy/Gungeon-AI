@@ -1,6 +1,25 @@
 opencv_createsamples -img bullet5050.jpg -bg bg.txt -info info/info.lst -pngoutput info -maxxangle 0.2 -maxyangle 0.2 -maxzangle 0.2 -num 3100
 opencv_createsamples -info info/info.lst -num 3100 -w 20 -h 20 -vec positives.vec
 nohup opencv_traincascade -data data -vec positives.vec -bg bg.txt -numPos 3000 -numNeg 2000 -minHitRate 0.999 -maxFalseAlarmRate 0.2 -numStages 7 -w 20 -h 20 &
-3367
-pid = 15156
 
+premade positives:
+opencv_createsamples -info info/info.lst -w 20 -h 20 -vec positives.vec
+nohup opencv_traincascade -data data -vec positives.vec -bg bg.txt -numPos 11 -numNeg 2000 -minHitRate 0.995 -maxFalseAlarmRate 0.5 -numStages 7 -w 20 -h 20 &
+
+3367
+pid = 19342
+
+example for info.lst: 0001_0009_0011_0053_0053.jpg 1 9 11 53 53
+name_x_y_width_height.jpg num x y width height
+
+0004_0585_0467_0050_0050.jpg 1 585 465 50 50
+0005_0899_0709_0050_0050.jpg 1 899 709 50 50
+0006_0747_0581_0050_0050.jpg 1 747 581 50 50
+0007_0939_0782_0050_0050.jpg 1 939 782 50 50
+0008_1054_0652_0050_0050.jpg 1 1054 652 50 50
+0009_1134_0591_0050_0050.jpg 1 1134 591 50 50
+0010_1123_0515_0050_0050.jpg 1 1123 515 50 50
+0011_1094_0308_0050_0050.jpg 1 1094 308 50 50
+0012_0899_0244_0050_0050.jpg 1 899 244 50 50
+0013_0756_0304_0050_0050.jpg 1 756 304 50 50
+0014_0686_0446_0050_0050.jpg 1 686 446 50 50

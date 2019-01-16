@@ -69,9 +69,37 @@ def resize_negatives():
         cv2.imwrite('negative_images/'+img, resized_image)
 
 def resize_positive():
-    pos = cv2.imread("positive_images/1.png")
-    resized_image = cv2.resize(pos, (50, 50))
-    cv2.imwrite("positive_images/positive_1.jpg", resized_image)
+    count = 0;
+    for img in os.listdir('positive_images'):
+        os.rename('positive_images/'+img, 'positive_images/'+str(count) + ".jpg")
+        count = count + 1
+
+def create_positives():
+    pos_info = ['1 580 460 60 60',
+                '1 894 704 60 60',
+                '1 751 299 60 60',
+                '1 681 441 60 60',
+                '1 742 566 60 60',
+                '1 934 777 60 60',
+                '1 1049 647 60 60',
+                '1 1129 586 60 60',
+                '1 1118 510 60 60',
+                '1 1089 303 60 60',
+                '1 894 239 60 60']
+    count = 12
+    init_images = [img for img in os.listdir('positive_images')]
+    str_to_file = ''
+    for i in range (15):
+        print(str(i))
+        for img in init_images:
+            #os.rename('positive_images/'+img, 'positive_images/'+str(count) + ".jpg")
+            image_to_copy = cv2.imread('positive_images/' + str(img))
+            cv2.imwrite('positive_images/' + str(count) + '.jpg', image_to_copy)
+            str_to_file += str(count) + '.jpg ' + pos_info[(count-1)%len(pos_info)] + '\n'
+            count = count + 1
+    f = open('info.dat', 'w')
+    f.write(str_to_file)
+    f.close()
     
 def create_pos_n_neg():
     for file_type in ['negative_images', 'positive_images']:
@@ -87,10 +115,11 @@ def create_pos_n_neg():
                 with open('info.dat', 'a') as f:
                     f.write(line)
 
-#reshape_positive()
+#resize_positive()
 #grab_negatives()
-create_pos_n_neg()
+#create_pos_n_neg()
 #resize_negatives()
 #store_raw_images()
 #find_uglies()
 #compile_negatives()
+create_positives()
