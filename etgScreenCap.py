@@ -30,11 +30,12 @@ def locate_bullets(original_img):
 def capture_screen():
     bullet_cascade = cv2.CascadeClassifier('bullet_cascade.xml')
     last_time = time.time()
+    img_num = 0
     while(True):
         screen = np.array(ImageGrab.grab(bbox=(10, 30, 1280, 750)))
         #locate_bullets(screen)
         gray = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
-        bullets = bullet_cascade.detectMultiScale(screen, 10, 10)
+        bullets = bullet_cascade.detectMultiScale(screen, 5, 5)
 
         for (x,y,w,h) in bullets:
             cv2.rectangle(screen, (x,y), (x+w, y+h), (255,255,0), 2)
@@ -42,6 +43,8 @@ def capture_screen():
         #print('Loop took {} seconds'.format(time.time()-last_time))
         last_time = time.time()
         cv2.imshow('window', cv2.cvtColor(screen, cv2.COLOR_BGR2RGB))
+        cv2.imwrite('progress_screenshots/' + str(img_num) + '.jpg', cv2.cvtColor(screen, cv2.COLOR_BGR2RGB))
+        img_num = img_num + 1
         if cv2.waitKey(25) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
             break
