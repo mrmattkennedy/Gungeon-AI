@@ -6,14 +6,14 @@ from time import sleep
 import os
 import shutil
 
-def grab_negatives_from_game():
+def grab_from_game():
     sleep(3)
-    for i in range(100, 2000):
+    for i in range(10, 20):
         ss = np.array(ImageGrab.grab())
-        ss = cv2.cvtColor(ss, cv2.COLOR_BGR2GRAY)
-        resized_ss = cv2.resize(ss, (100, 100))
-        cv2.imwrite("negative_images_grayscale/" + str(i) + ".jpg", resized_ss)
-        sleep(0.1)
+        ss = cv2.cvtColor(ss, cv2.COLOR_BGR2RGB)
+        #resized_ss = cv2.resize(ss, (100, 100))
+        cv2.imwrite("positive_images_marine/" + str(i) + ".jpg", ss)
+        sleep(1)
 
 def store_raw_images():
     neg_images_link = 'http://image-net.org/api/text/imagenet.synset.geturls?wnid=n00523513'   
@@ -102,10 +102,10 @@ def create_positives():
     f.close()
     
 def create_pos_n_neg():
-    for file_type in ['negative_images', 'positive_images']:
+    for file_type in ['negative_from_web']:
 
         for img in os.listdir(file_type):
-            if file_type == 'negative_images':
+            if file_type == 'negative_from_web':
                 line = 'neg/'+img+'\n'
                 with open('bg.txt', 'a') as f:
                     f.write(line)
@@ -117,9 +117,10 @@ def create_pos_n_neg():
 
 #resize_positive()
 #grab_negatives()
-#create_pos_n_neg()
+create_pos_n_neg()
 #resize_negatives()
 #store_raw_images()
 #find_uglies()
 #compile_negatives()
-create_positives()
+#create_positives()
+#grab_from_game()

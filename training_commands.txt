@@ -3,10 +3,10 @@ opencv_createsamples -info info/info.lst -num 3100 -w 20 -h 20 -vec positives.ve
 nohup opencv_traincascade -data data -vec positives.vec -bg bg.txt -numPos 11 -numNeg 300 -minHitRate 0.995 -maxFalseAlarmRate 0.4 -numStages 7 -w 30 -h 30 &
 
 premade positives:
-opencv_createsamples -info info/info.lst -w 20 -h 20 -vec positives.vec
-nohup opencv_traincascade -data data -vec positives.vec -bg bg.txt -numPos 11 -numNeg 2000 -minHitRate 0.995 -maxFalseAlarmRate 0.5 -numStages 7 -w 20 -h 20 &
+opencv_createsamples -info info/info.dat -num 10 -w 30 -h 30 -vec positives.vec
+nohup opencv_traincascade -data data -vec positives.vec -bg bg.txt -numPos 10 -numNeg 300 -minHitRate 0.995 -maxFalseAlarmRate 0.4 -numStages 7 -w 30 -h 30 &
 
-pid = 10010
+pid = 1140
 
 example for info.lst: 0001_0009_0011_0053_0053.jpg 1 9 11 53 53
 name_x_y_width_height.jpg num x y width height
